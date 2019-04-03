@@ -1,0 +1,14 @@
+{
+    "name": "Vetor",
+    "description": "",
+    "authors": [
+        {
+            "name": "Rogério Alencar Lino Filho", 
+            "email": "rogeriolino@gmail.com",
+            "homepage": "http://rogeriolino.com"
+        }
+    ],
+    "events": {
+        "onload": "VetorPanel"
+    }
+}

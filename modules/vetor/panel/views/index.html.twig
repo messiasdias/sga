@@ -1,0 +1,221 @@
+{% extends "module.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+    <script>
+        var config = {{ config | raw }};
+    </script>
+    <link rel="stylesheet" type="text/css" href="{{ resources('css/switchery.min.css', module.chave) }}" />
+    <script src="{{ resources('js/angular.min.js', module.chave) }}"></script>
+    <script src="{{ resources('js/jquery-ui-1.10.4.custom.min.js', module.chave) }}"></script>
+    <script src="{{ resources('js/angular-ui.sortable.js', module.chave) }}"></script>
+    <script src="{{ resources('js/switchery.min.js', module.chave) }}"></script>
+    <script src="{{ resources('js/ng-switchery.js', module.chave) }}"></script>
+    <script src="{{ resources('js/colpick.js', module.chave) }}"></script>
+    <script src="{{ resources('js/app.js', module.chave) }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div ng-app="vetor">
+        <div class="module-content" ng-controller="panelCtrl">
+            <div class="header">
+                <div class="pull-right">
+                    <button id="btn-save" type="button" ng-click="save()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-save"></span>
+                        {% trans %}Salvar{% endtrans %}
+                    </button>
+                </div>
+                <img src="{{ resources('images/icon.png', module.chave) }}" />
+                <h2>{{ module.nome }}</h2>
+                <p>{{ module.descricao }}</p>
+            </div>
+            <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tab-widgets" role="tab" data-toggle="tab">
+                            {% trans %}Mídias{% endtrans %}
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#tab-news" role="tab" data-toggle="tab">
+                            {% trans %}Notícias{% endtrans %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="tab-widgets">
+                    <div class="col-md-2">
+                        <button type="button" ng-click="addWidget('youtube')" class="btn btn-default btn-block btn-lg" title="{% trans %}Adicionar widget{% endtrans %}">
+                            <span class="glyphicon glyphicon-film"></span>
+                            {% trans %}Youtube{% endtrans %}
+                        </button>
+                        <button type="button" ng-click="addWidget('video')" class="btn btn-default btn-block btn-lg" title="{% trans %}Adicionar widget{% endtrans %}">
+                            <span class="glyphicon glyphicon-film"></span>
+                            {% trans %}Vídeo{% endtrans %}
+                        </button>
+                        <button type="button" ng-click="addWidget('image')" class="btn btn-default btn-block btn-lg" title="{% trans %}Adicionar widget{% endtrans %}">
+                            <span class="glyphicon glyphicon-picture"></span>
+                            {% trans %}Imagem{% endtrans %}
+                        </button>
+                        <button type="button" ng-click="addWidget('audio')" class="btn btn-default btn-block btn-lg" title="{% trans %}Adicionar widget{% endtrans %}">
+                            <span class="glyphicon glyphicon-music"></span>
+                            {% trans %}Áudio{% endtrans %}
+                        </button>
+                        <button type="button" ng-click="addWidget('html')" class="btn btn-default btn-block btn-lg" title="{% trans %}Adicionar widget{% endtrans %}">
+                            <span class="glyphicon glyphicon-file"></span>
+                            {% trans %}HTML{% endtrans %}
+                        </button>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="well" ng-show="config.widgets.length==0">
+                            <p><span class="glyphicon glyphicon-info-sign"></span> Nenhum widget cadastrado. Clique em adicionar widget para começar.</p>
+                        </div>
+                        <div id="widgets" class="panel-group" ui-sortable="sortableOptions" ng-model="config.widgets">
+                            <div class="widget panel panel-default widget-[[ widget.active ? 'active' : 'inactive' ]]" ng-repeat="widget in config.widgets">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title [[ widget.type ]]">
+                                        <span class="handle glyphicon glyphicon-move"></span>
+                                        <a href="#" class="toggle">
+                                            <span class="glyphicon glyphicon-[[ styleClass(widget) ]]"></span>
+                                            [[ widget.title ]]
+                                        </a>
+
+                                        <span class="pull-right">
+                                            <input type="checkbox" class="js-switch" ui-switch ng-model="widget.active">
+                                            <a href="#" title="{% trans %}Excluir{% endtrans %}" ng-click="deleteWidget(widget)">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </a>
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div class="panel-body" style="display: none;">
+                                    <div class="form-group">
+                                        <label for="titulo">{% trans %}Título{% endtrans %}</label>
+                                        <input id="titulo" type="text" class="form-control" ng-model="widget.title">
+                                    </div>
+                                    <div class="form-group" ng-hide="widget.type == 'youtube' || widget.type == 'video' || widget.type == 'audio'">
+                                        <label for="duracao">{% trans %}Duração{% endtrans %} (ms)</label>
+                                        <input id="duracao" type="text" class="form-control" ng-model="widget.duration">
+                                    </div>
+                                    <div class="form-group" ng-show="widget.type == 'video' || widget.type == 'audio' || widget.type == 'youtube'">
+                                        <label for="volume">{% trans %}Volume{% endtrans %}</label>
+                                        <input id="volume" type="number" class="form-control" ng-model="widget.volume">
+                                    </div>
+                                    <div class="form-group" ng-show="widget.type == 'youtube'">
+                                        <label for="youtube-content">{% trans %}ID do vídeo{% endtrans %}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon2">http://www.youtube.com/watch?v=</span>
+                                            <input id="youtube-content" class="form-control" ng-model="widget.content" maxlength="20" placeholder="P9-FCC6I7u0">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="widget.type == 'html'">
+                                        <label for="html-content">{% trans %}Código HTML{% endtrans %}</label>
+                                        <textarea id="html-content" class="form-control" ng-model="widget.content" rows="5"></textarea>
+                                    </div>
+                                    <div class="form-group" ng-show="widget.type == 'image'">
+                                        <label for="image-content">{% trans %}Url da imagem{% endtrans %}</label>
+                                        <input id="image-content" type="text" class="form-control" ng-model="widget.content">
+                                    </div>
+                                    <div class="form-group" ng-show="widget.type == 'video'">
+                                        <label for="video-content">{% trans %}Url do vídeo{% endtrans %} (mp4)</label>
+                                        <input for="video-content" type="text" class="form-control" ng-model="widget.content">
+                                    </div>
+                                    <div class="form-group" ng-show="widget.type == 'audio'">
+                                        <label for="audio-content">{% trans %}Url do áudio{% endtrans %} (mp3)</label>
+                                        <input for="audio-content" type="text" class="form-control" ng-model="widget.content">
+                                    </div>
+                                    <div class="form-group" ng-hide="widget.type == 'youtube'">
+                                        <label for="background">{% trans %}Cor de fundo{% endtrans %}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="background-color: [[ widget.background ]]">&nbsp;</span>
+                                            <input id="background" type="text" class="form-control color-picker" ng-model="widget.background">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-default" ng-click="preview(widget)">
+                                            <span class="glyphicon glyphicon-eye-open"></span>
+                                            Preview
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tab-news">
+                    <div class="form-group">
+                        <label for="news-interval">{% trans %}Intervalo entre as notícias (ms){% endtrans %}</label>
+                        <input id="news-interval" type="number" class="form-control" ng-model="config.news.interval">
+                    </div>
+                    <div>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{% trans %}Feeds{% endtrans %}</th>
+                                    <th class="col-sm-3">{% trans %}Tipo{% endtrans %}</th>
+                                    <th class="col-sm-1"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="feed in config.news.sources">
+                                    <td>
+                                        <input type="text" class="form-control" placeholder="URL" ng-model="feed.url">
+                                    </td>
+                                    <td>
+                                        <select class="form-control" ng-model="feed.type">
+                                            <option value="rss">RSS</option>
+                                            <option value="atom">Atom</option>
+                                            <option value="googleapi">Google APIs (requer Internet)</option>
+                                        </select>
+                                    </td>
+                                    <td class="col-sm-1">
+                                        <button type="button" class="btn btn-default" title="{% trans %}Remover{% endtrans %}" ng-click="deleteFeed(feed)">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <button type="button" class="btn btn-default" ng-click="addFeed()">
+                                <span class="glyphicon glyphicon-plus-sign"></span>
+                                {% trans %}Adicionar novo Feed{% endtrans %}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dialog-preview" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">{% trans %}Preview{% endtrans %}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="preview preview-youtube">
+                                <iframe id="youtube-iframe" frameborder="0" height="300">
+                            </div>
+                            <div class="preview preview-video">
+                                <video id="video-player" controls>
+                                </video>
+                            </div>
+                            <div class="preview preview-audio">
+                                <audio id="audio-player" controls>
+                                </audio>
+                            </div>
+                            <div class="preview preview-image">
+                                <img id="image-preview" />
+                            </div>
+                            <div class="preview preview-html">
+                                <div ng-bind-html="htmlPreview"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

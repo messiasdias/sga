@@ -1,0 +1,13 @@
+{
+    "type": 1,
+    "name": "Vetor Panel",
+    "description": "Módulo de administração do Vetor Panel",
+    "homepage": "http://rogeriolino.com",
+    "authors": [
+        {
+            "name": "Rogério Lino",
+            "email": "rogeriolino@gmail.com",
+            "homepage": "http://rogeriolino.com"
+        }
+    ]
+}
