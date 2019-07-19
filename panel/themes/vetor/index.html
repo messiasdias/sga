@@ -14,15 +14,9 @@
                 <div class="panel-body">
                     <span class="text-muted">carregando...</span>
                 </div>
-                  <div class="row">
-                      <div id="paciente-atual" class="col-md-12">
-                          <div id="paciente" class="paciente blink">
-                              <span>{{ ultima.texto }}</span>
-                          </div>
-                      </div>
-  	              </div>
             </div>
         </div>
+        
     </div>
     <div class="col-sm-4 h-100" style="background: #E8E8F0">
         <div id="senha-atual" class="row">
@@ -31,11 +25,11 @@
                 <span>{{ ultima.texto }}</span>
             </div>
             <div class="local blink">
-		            <span>{{ ultima.local }} {{ ultima.numeroLocal }}</span>
+                <span>{{ ultima.local }} {{ ultima.numeroLocal }}</span>
             </div>
         </div>
         <div id="historico" class="row">
-            <h4>Senhas Anteriores</h4>
+            <h4>Histórico</h4>
             <div class="senhas">
                 <div class="senha-chamada {{ senha.styleClass }}" ng-repeat="senha in historico | limitTo: 3">
                     <div class="senha col-sm-8">
@@ -46,23 +40,16 @@
                     </div>
                 </div>
             </div>
-	       </div>
-        <div id="paciente-atual">
-             <h4>Paciente</h4>
-               <div class="paciente-atual">
-                 <span>{{ ultima.nomeCliente }}</span>
-             </div>
         </div>
-    </div>
         <div id="relogio" class="row">
             <div class="date col-sm-5">
-                <span class="text"> <!-- {{ clock | date:'dd' }} de {{ month }} --> </span>
-                <span class="number"> <!-- {{ clock | date:'yyyy' }} --> </span>
+                <span class="text">{{ clock | date:'dd' }} de {{ month }}</span>
+                <span class="number">{{ clock | date:'yyyy' }}</span>
             </div>
             <div class="time col-sm-7">
-                <span class="number"> <!-- {{ clock | date:'HH' }} --> </span>
-                <span class="separator"> <!-- : --> </span>
-                <span class="number"> <!-- {{ clock | date:'mm' }} --> </span>
+                <span class="number">{{ clock | date:'HH' }}</span>
+                <span class="separator">:</span>
+                <span class="number">{{ clock | date:'mm' }}</span>
             </div>
         </div>
     </div>

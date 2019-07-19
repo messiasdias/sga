@@ -1,4 +1,4 @@
-/**
+/** 
  * Vetor - Painel Web
  * @author Rogerio Lino <rogeriolino@gmail.com>
  */
@@ -30,9 +30,9 @@
     height: 100%;
 }
 
-#layout-content {
+#layout-content { 
     font-size: 12px;
-    position: relative;
+    position: relative; 
 }
 
 /* Media */
@@ -40,7 +40,7 @@
     position: relative;
 }
 
-.vetor #media {
+.vetor #media { 
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -65,14 +65,7 @@
 }
 
 .vetor #senha-atual .local {
-    font-size: 4vw;
-    text-align: center;
-    font-weight: bold;
-}
-
-/* Paciente */
-.vetor #paciente-atual .paciente-atual {
-    font-size: 4.5vw;
+    font-size: 6vw;
     text-align: center;
     font-weight: bold;
 }
@@ -88,24 +81,22 @@
 }
 
 .vetor #historico .senhas .senha {
-    font-size: 4vw;
+    font-size: 5vw;
     font-weight: bold;
 }
 
 .vetor #historico .senhas .local {
-    font-size: 4vw;
+    font-size: 5vw;
     font-weight: bold;
 }
 
 /* cores - atendimento normal */
 #layout.normal #senha-atual .senha span { color: #182945; }
 #layout.normal #senha-atual .local span { color: #182945; }
-#layout.normal #paciente-atual .paciente-atual span { color: #182945; }
 #layout.normal #historico .senhas * { color: #586985; }
 
 /* cores - atendimento prioritario */
 #layout.prioridade #senha-atual span { color: #fc5b5e; }
-#layout.prioridade #paciente-atual span { color: #fc5b5e; }
 
 /* cores - atendimento prioritario quando no historico */
 #historico .senhas .prioridade * { color: #d2322d !important; }
