@@ -1,4 +1,4 @@
-        
+
 <div id="layout-content">
     <div id="senha-container">
         <div id="mensagem">
@@ -20,16 +20,29 @@
             </div>
         </div>
     </div>
-    <div id="historico">
-        <div class="senhas">
-            <div class="col-sm-3 senha-chamada {{ senha.styleClass }}" ng-repeat="senha in historico | limitTo: 4">
-                <div class="senha">
-                    <span>{{ senha.texto }}</span>
-                </div>
-                <div class="local">
-                    <span>{{ senha.local }}: {{ senha.numeroLocal }}</span>
-                </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="paciente-container">
+            <div id="paciente" class="blink">
+                <span>{{ ultima.nomeCliente }}</span>
             </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div id="historico">
+              <div class="senhas">
+                  <div class="col-sm-3 senha-chamada {{ senha.styleClass }}" ng-repeat="senha in historico | limitTo: 4">
+                      <div class="senha">
+                          <span>{{ senha.texto }}</span>
+                      </div>
+                      <div class="local">
+                          <span>{{ senha.local }}: {{ senha.numeroLocal }}</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
         </div>
     </div>
 </div>
