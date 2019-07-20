@@ -104,12 +104,23 @@ angular.module('app', [])
         $scope.chamar = function() {
             if (PainelWeb.started && $scope.senhas.length > 0) {
                 var senha = $scope.senhas.shift();
+                // função de espera
+                //function sleep(milliseconds) {
+                //    var start = new Date().getTime();
+                //    for (var i = 0; i < 1e7; i++) {
+                //      if ((new Date().getTime() - start) > milliseconds){
+                //        break;
+                //      }
+                //    }
+                //}
 
                 PainelWeb.trigger('callstart');
                 // som e animacao
                 PainelWeb.Alert.play($scope.config.alert, !$scope.config.vocalizar);
                 if ($scope.config.vocalizar) {
                     PainelWeb.Speech.play(senha, speechParams());
+                    // esperando 2 segundos
+                    //sleep(2000)
                 }
                 PainelWeb.blink($('.blink'));
                 // evita adicionar ao historico senha rechamada
@@ -280,7 +291,6 @@ angular.module('app', [])
 
         function speechParams() {
 
-          ///////////return false;
             return {
                 vocalizar: $scope.config.vocalizar,
                 zeros: $scope.config.vocalizarZero,
@@ -355,8 +365,16 @@ var PainelWeb = {
         play: function(senha, params) {
             params = params || {};
             if (params.vocalizar) {
-                // "senha"
-                this.queue.push({name: "senha", lang: params.lang});
+                // verificando o peso do atendimento e chamando de acordo com o tipo, convencional ou preferencial.
+                var tipo_senha = senha.peso;
+                if (tipo_senha > 0) {
+                  // "senha preferencial"
+                  this.queue.push({name: "senha_preferencial", lang: params.lang});
+                }
+                else {
+                  // "senha convencional"
+                  this.queue.push({name: "senha_convencional", lang: params.lang});
+                }
                 // sigla + numero
 
                 var text = (params.zeros) ? $.painel().format(senha) : senha.sigla + senha.numero;
