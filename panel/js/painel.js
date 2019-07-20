@@ -6,12 +6,17 @@
     "use strict";
     var setup = false;
     var defaults = {
-        url: "",
-        unidade: 0,
-        servicos: [],
-        interval: 3,
+        // ''
+        url: "http://sga.setev.local",
+        // 0 
+        unidade: 1,
+        // []
+        servicos: [1,2,3],
+        // 3
+        interval: 5,
         events: {}
     };
+
     $.painel = function(opts) {
         var self = this;
         if (setup) {
