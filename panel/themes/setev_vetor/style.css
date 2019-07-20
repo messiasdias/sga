@@ -1,0 +1,164 @@
+/**
+ * Vetor - Painel Web
+ * @author Rogerio Lino <rogeriolino@gmail.com>
+ */
+
+.vetor .h-100 { height: 100%; }
+.vetor .h-80 { height: 80%; }
+.vetor .h-70 { height: 70%; }
+.vetor .h-50 { height: 50%; }
+.vetor .h-30 { height: 30%; }
+.vetor .h-25 { height: 25%; }
+.vetor .h-15 { height: 15%; }
+.vetor .h-10 { height: 10%; }
+
+.vetor h4 {
+    font-family: "Ubuntu";
+    font-size: 2.2vw;
+    font-weight: bold;
+    color: #999;
+    padding-top: 25px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+#layout, #layout * {
+    line-height: 1;
+}
+
+#layout>div, #layout-content {
+    height: 100%;
+}
+
+#layout-content {
+    font-size: 12px;
+    position: relative;
+}
+
+/* Media */
+.vetor #media-container {
+    position: relative;
+}
+
+.vetor #media {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.vetor #media .widget { height: 100%; }
+
+.vetor #media video,
+.vetor #media img { vertical-align: middle; }
+
+.vetor #media .item img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Senha */
+.vetor #senha-atual .senha {
+    font-size: 10vw;
+    font-weight: bold;
+    text-align: center;
+}
+
+.vetor #senha-atual .local {
+    font-size: 4vw;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Paciente */
+.vetor #paciente-atual .paciente-atual {
+    font-size: 4.5vw;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Historico */
+.vetor #historico .senhas {
+    padding: 0 20px;
+    overflow: hidden;
+}
+
+.vetor #historico .senhas div.senha-chamada {
+    text-align: center;
+}
+
+.vetor #historico .senhas .senha {
+    font-size: 4vw;
+    font-weight: bold;
+}
+
+.vetor #historico .senhas .local {
+    font-size: 4vw;
+    font-weight: bold;
+}
+
+/* cores - atendimento normal */
+#layout.normal #senha-atual .senha span { color: #182945; }
+#layout.normal #senha-atual .local span { color: #182945; }
+#layout.normal #paciente-atual .paciente-atual span { color: #182945; }
+#layout.normal #historico .senhas * { color: #586985; }
+
+/* cores - atendimento prioritario */
+#layout.prioridade #senha-atual span { color: #fc5b5e; }
+#layout.prioridade #paciente-atual span { color: #fc5b5e; }
+
+/* cores - atendimento prioritario quando no historico */
+#historico .senhas .prioridade * { color: #d2322d !important; }
+
+
+.vetor #news {
+    padding: 30px 0;
+}
+
+.vetor #news .panel {
+    border-color: #0B486B;
+}
+
+.vetor #news .panel-heading {
+    color: #fff;
+    font-size: 1.5vw;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #0B486B !important;
+}
+
+.vetor #news .panel-body {
+    font-size: 2.5em;
+    height: 100%;
+    overflow: hidden;
+}
+
+.vetor #relogio {
+    position: absolute;
+    bottom: 10px;
+}
+
+.vetor #relogio span {
+    font-weight: bold;
+}
+
+.vetor #relogio .time span {
+    color: #0B486B;
+    font-size: 6.5vw;
+}
+
+.vetor #relogio .date {
+    text-align: right;
+}
+
+.vetor #relogio .date span {
+    color: #999;
+}
+
+.vetor #relogio .date span.text {
+    font-size: 1.5vw;
+}
+
+#relogio .date span.number {
+    font-size: 4.9vw;
+}

@@ -21,15 +21,19 @@ angular.module('app', [])
         $scope.ultimoId = 0;
 
         $scope.config = {
-            url: '',
-            theme: 'default',
-            alert: 'ekiga-vm.wav',
-            vocalizar: false,
-            vocalizarZero: false,
-            vocalizarLocal: false,
-            lang: (window.navigator.userLanguage || window.navigator.language || 'pt').split('-')[0],
+            // ''
+            url: 'http://sga.setev.local',
+            theme: 'setev_vetor',
+            // alert: 'ekiga-vm.wav',
+            alert: 'infobleep.wav',
+            vocalizar: true,
+            vocalizarZero: true,
+            vocalizarLocal: true,
+            //lang: (window.navigator.userLanguage || window.navigator.language || 'pt').split('-')[0],
+            lang: "pt",
             unidade: {},
-            servicos: []
+            // []
+            servicos: [1]
         };
 
         $scope.changeUrl = function() {
@@ -88,6 +92,9 @@ angular.module('app', [])
 
         $scope.save = function() {
             PainelWeb.Config.save($scope);
+
+            console.log( $scope.config );
+
             $.painel({
                 url: $scope.config.url,
                 unidade: $scope.config.unidade.id,
@@ -364,8 +371,6 @@ var PainelWeb = {
                 for (var i = 0; i < text.length; i++) {
                     this.queue.push({name: text.charAt(i).toLowerCase(), lang: params.lang});
                 }
-
-                console.log(text, params);
 
                 if (params.local) {
                     // nome do local
